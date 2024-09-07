@@ -18,6 +18,11 @@ import { Button } from "@/components/ui/button";
 import { Ruler, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import TrailCard from "@/components/cards/TrailCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ReviewCard from "@/components/cards/ReviewCard";
+import FactCard from "@/components/cards/FactCard";
+import CompletedSection from "@/components/cards/CompletedSection";
+import ReviewSection from "@/components/cards/ReviewSection";
 
 type Props = {};
 
@@ -82,10 +87,13 @@ export default function TrailPage({}: Props) {
             <div className="grid grid-cols-2 gap-10 h-full">
               {[1, 2, 3, 4, 6, 7, 8].map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <div className="p-4 bg-primary/10 w-fit rounded-full">
+                  <div className="p-4 bg-primary/10 w-fit text-primary rounded-full">
                     <Ruler />
                   </div>
-                  <p className="font-medium text-primary">2.2 km</p>
+                  <div>
+                    <p className="font-medium text-sm opacity-50">Distance</p>
+                    <p className="font-medium text-primary">2.2 km</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -132,8 +140,45 @@ export default function TrailPage({}: Props) {
                 odio quia. Pariatur ipsam eveniet cupiditate voluptates tenetur
                 aliquam saepe culpa ad.
               </p>
+              <br />
+              <div className="flex flex-wrap gap-4">
+                {[1, 2, 3, 4, 4].map((item, index) => (
+                  <Badge
+                    key={index}
+                    variant={"outline"}
+                    className="text-md opacity-50"
+                  >
+                    Visit Temple
+                  </Badge>
+                ))}
+              </div>
             </div>
+            <br />
+            <hr />
+            <br />
             {/* Review wala tab */}
+            <Tabs defaultValue="reviews" className="w-full ">
+              <TabsList className="flex w-full justify-start bg-transparent">
+                <TabsTrigger value="reviews">Reviews</TabsTrigger>
+                <TabsTrigger value="facts">Facts</TabsTrigger>
+                <TabsTrigger value="completed">Completed</TabsTrigger>
+              </TabsList>
+              <hr />
+              <TabsContent value="reviews" className="flex gap-6 flex-col mt-4">
+                <ReviewSection />
+                {data.map((item, index) => (
+                  <ReviewCard key={index} />
+                ))}
+              </TabsContent>
+              <TabsContent value="facts">
+                {data.map((item, index) => (
+                  <FactCard key={index} />
+                ))}
+              </TabsContent>
+              <TabsContent value="completed">
+                <CompletedSection />
+              </TabsContent>
+            </Tabs>
           </div>
           <div>
             <h1 className="text-xl font-medium">Nearby Trails</h1>
