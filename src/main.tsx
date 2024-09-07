@@ -8,6 +8,7 @@ import ExplorePage from "./pages/explore/index.tsx";
 import LoginPage from "./pages/auth/login.tsx";
 import RegisterPage from "./pages/auth/register.tsx";
 import MapPage from "./pages/map/MapPage.tsx";
+import TrailPage from "./pages/explore/trail.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="auth/login" element={<LoginPage />} />
           <Route path="auth/register" element={<RegisterPage />} />
           <Route path="apps" element={<ExplorePage />} />
+          <Route path="trails/:id" element={<TrailPage />} />
           <Route path="map" element={<MapPage />} />
 
           {/* <Route path="apps/:slug" element={<ApplicationDetail />} /> */}
