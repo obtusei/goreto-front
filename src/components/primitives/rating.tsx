@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const Rating = () => {
+const Rating = ({ disabled = false }: { disabled?: boolean }) => {
   const [rating, setRating] = useState(2);
   const handleRatingClick = (value: number) => {
     // if (!authState?.authenticated) {
@@ -35,10 +35,14 @@ const Rating = () => {
         {stars.map((star) => (
           <button
             key={star}
-            onClick={() => handleRatingClick(star)}
+            onClick={() => {
+              if (!disabled) {
+                handleRatingClick(star);
+              }
+            }}
             className={`text-xl mr-2 ${
               star <= rating ? "text-primary" : "text-gray-300"
-            }`}
+            } ${disabled ? "cursor-default" : "cursor-pointer"}`}
           >
             <Star size={18} />
           </button>

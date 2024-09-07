@@ -9,34 +9,30 @@ import LoginPage from "./pages/auth/login.tsx";
 import RegisterPage from "./pages/auth/register.tsx";
 import MapPage from "./pages/map/MapPage.tsx";
 import TrailPage from "./pages/explore/trail.tsx";
-
+import SavedPage from "./pages/saved/index.tsx";
+import AccountPage from "./pages/account/index.tsx";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.ts";
+import { CookiesProvider } from "react-cookie";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<App />} />
-          <Route path="auth/login" element={<LoginPage />} />
-          <Route path="auth/register" element={<RegisterPage />} />
-          <Route path="apps" element={<ExplorePage />} />
-          <Route path="trails/:id" element={<TrailPage />} />
-          <Route path="map" element={<MapPage />} />
-
-          {/* <Route path="apps/:slug" element={<ApplicationDetail />} /> */}
-          {/* <Route path="designs" element={<Designs />} /> */}
-          {/* <Route path="designs/:slug" element={<ApplicationDetail />} /> */}
-          {/* <Route path="sites" element={<Websites />} /> */}
-          {/* <Route path="sites/:slug" element={<ApplicationDetail />} /> */}
-          {/* <Route path="sketches" element={<Sketches />} /> */}
-          {/* <Route path="sketches/:slug" element={<ApplicationDetail />} /> */}
-          {/* <Route path="illustrations" element={<Illustrations />} /> */}
-          {/* <Route path="illustrations/:slug" element={<ApplicationDetail />} /> */}
-          {/* <Route path="blogs" element={<Blogs />} /> */}
-          {/* <Route path="blogs/:slug" element={<BlogDetail />} /> */}
-          {/* <Route path="contact" element={<Contact />} /> */}
-          {/* <Route path="*" element={<NoPage />} /> */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CookiesProvider defaultSetOptions={{ path: "/" }}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<App />} />
+              <Route path="auth/login" element={<LoginPage />} />
+              <Route path="auth/register" element={<RegisterPage />} />
+              <Route path="apps" element={<ExplorePage />} />
+              <Route path="trails/:id" element={<TrailPage />} />
+              <Route path="map" element={<MapPage />} />
+              <Route path="saved" element={<SavedPage />} />
+              <Route path="account" element={<AccountPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
+    </CookiesProvider>
   </StrictMode>
 );

@@ -2,6 +2,10 @@ import LogoIcon from "./icons";
 import { Button } from "./ui/button";
 import {
   Bookmark,
+  Clipboard,
+  Earth,
+  Landmark,
+  LogOut,
   Map,
   Moon,
   Mountain,
@@ -30,11 +34,6 @@ export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
       href: "/map",
     },
     {
-      title: "Explore",
-      icon: <Search />,
-      href: "/search",
-    },
-    {
       title: "Saved",
       icon: <Bookmark />,
       href: "/saved",
@@ -42,40 +41,54 @@ export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
     {
       title: "User",
       icon: <User2 />,
-      href: "/user",
+      href: "/account",
     },
   ];
   const location = useLocation();
   const size = navSize > 8;
   return (
-    <div className="flex justify-between items-center flex-col h-screen p-10">
-      <LogoIcon size="40" />
-      <div
-        className={`border ${
-          size ? "rounded-md" : "rounded-full "
-        } flex flex-col gap-4 p-2 transition-transform duration-200`}
-      >
-        {menu.map((item, index) => (
-          <Button
-            key={index}
-            size={size ? "default" : "icon"}
-            className={`rounded-full duration-300 transition-transform gap-4 hover:scale-110 ${
-              size ? "justify-start" : "justify-center"
-            } ${
-              location.pathname == item.href
-                ? "bg-primary/10 text-primary"
-                : "ghost"
-            }`}
-            variant={location.pathname == item.href ? "secondary" : "ghost"}
-            asChild
-          >
-            <Link to={item.href} aria-label={item.title}>
-              {item.icon} {size ? item.title : ""}
-            </Link>
-          </Button>
-        ))}
+    <div className="flex justify-between items-center bg-white dark:bg-slate-900 lg:bg-transparent fixed lg:relative inset-x-0 bottom-0 lg:flex-col lg:h-screen p-2 lg:p-6">
+      <div className="hidden lg:block">
+        <LogoIcon size="40" />
       </div>
-      <div>
+      <div className="flex flex-col items-center gap-4">
+        <Button variant={"ghost"} size={"icon"} asChild>
+          <Link to={"/"}>
+            <span className="relative flex h-6 w-6">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-6 w-6 bg-primary items-center justify-center">
+                <div className="bg-white w-2 h-2 rounded-full"></div>
+              </span>
+            </span>
+          </Link>
+        </Button>
+        <div
+          className={`border ${
+            size ? "rounded-md" : " rounded-2xl lg:rounded-full "
+          } flex lg:flex-col gap-4 p-2 w-full lg:w-fit justify-between lg:justify-center transition-transform duration-200`}
+        >
+          {menu.map((item, index) => (
+            <Button
+              key={index}
+              size={size ? "default" : "icon"}
+              className={`rounded-full duration-300 transition-transform gap-4 hover:scale-110 ${
+                size ? "justify-start" : "justify-center"
+              } ${
+                location.pathname == item.href
+                  ? "bg-primary/10 text-primary"
+                  : "ghost"
+              }`}
+              variant={location.pathname == item.href ? "secondary" : "ghost"}
+              asChild
+            >
+              <Link to={item.href} aria-label={item.title}>
+                {item.icon} {size ? item.title : ""}
+              </Link>
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div className="hidden lg:block space-y-4">
         <Button
           variant={"ghost"}
           className="text-gray-400 transition-transform duration-300 gap-2"
@@ -83,6 +96,14 @@ export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
         >
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}{" "}
           {size ? (darkMode ? "Toggle Dark" : "Toggle Light") : ""}
+        </Button>
+        <Button
+          variant={"ghost"}
+          className="text-gray-400 transition-transform duration-300 gap-2"
+          onClick={setDarkMode}
+        >
+          <LogOut className="text-red-600" />
+          {size ? "Logout" : ""}
         </Button>
       </div>
     </div>

@@ -82,8 +82,8 @@ export default function TrailPage({}: Props) {
         </div>
 
         {/* First Section */}
-        <div className="grid grid-cols-2">
-          <div className="flex flex-col justify-between p-10">
+        <div className="grid lg:grid-cols-2">
+          <div className="flex flex-col justify-between p-4 lg:p-10">
             <div className="grid grid-cols-2 gap-10 h-full">
               {[1, 2, 3, 4, 6, 7, 8].map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
@@ -123,8 +123,8 @@ export default function TrailPage({}: Props) {
           </div>
         </div>
         {/* Second Seciton */}
-        <div className="grid grid-cols-4 py-10">
-          <div className="col-span-3 p-10">
+        <div className="grid grid-cols-4 md-4 lg:py-10">
+          <div className="col-span-4 lg:col-span-3 p-4 lg:p-10">
             {/* Description */}
             <div>
               <p>
@@ -180,7 +180,7 @@ export default function TrailPage({}: Props) {
               </TabsContent>
             </Tabs>
           </div>
-          <div>
+          <div className="col-span-4 lg:col-span-1">
             <h1 className="text-xl font-medium">Nearby Trails</h1>
             <div className="flex flex-col gap-5">
               {data.map((item, index) => (

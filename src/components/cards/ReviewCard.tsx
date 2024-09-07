@@ -6,7 +6,7 @@ type Props = {};
 
 export default function ReviewCard({}: Props) {
   return (
-    <div className="border p-4">
+    <div className="border p-4 rounded-lg">
       <div className="flex gap-2">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
@@ -20,7 +20,7 @@ export default function ReviewCard({}: Props) {
           </div>
         </div>
       </div>
-      <Rating />
+      <Rating disabled />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. A blanditiis
         distinctio laudantium veniam unde quisquam impedit maiores, temporibus

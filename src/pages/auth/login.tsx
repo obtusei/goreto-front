@@ -18,7 +18,8 @@ import { Eye, EyeOff, Key, Loader2Icon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import LogoIcon from "@/components/icons";
-
+import { useLoginMutation } from "@/redux/features/authSlice";
+import { useCookies } from "react-cookie";
 const formSchema = z.object({
   username: z.string(),
   password: z.string(),
@@ -32,12 +33,14 @@ export default function LoginPage() {
       password: "",
     },
   });
-  // const [logIn, { isLoading, isError, error }] = useLoginMutation();
+  const [logIn] = useLoginMutation();
   const [loading, setLoading] = useState<boolean>(false);
   // const { data: session } = useSessionQuery();
   // const [sessionData, setSessionData] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   // const router = useRouter();
+  const [crsftoken, setCrsftoken] = useCookies(["crsftoken"]);
+  const [sesionId, setSessionId] = useCookies(["sessionid"]);
   const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -47,11 +50,14 @@ export default function LoginPage() {
       //   router.push("/admin");
       //   setLoading(false);
       // } else {
-      //   await logIn(values).unwrap();
-      //   toast({
-      //     title: "Login Successful",
-      //     description: "You have successfully logged in",
-      //   });
+      const data = await logIn(values).unwrap();
+      console.log(data);
+
+      setLoading(false);
+      toast({
+        title: "Login Successful",
+        description: "You have successfully logged in",
+      });
       //   setTimeout(() => {
       //     setLoading(false);
       //     router.push("/instant-jobs");

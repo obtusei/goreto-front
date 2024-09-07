@@ -21,13 +21,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Progress } from "../ui/progress";
 type Props = {};
 
 export default function ReviewSection({}: Props) {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between flex-col lg:flex-row gap-10 border-b pb-4 lg:items-center">
       {/*  */}
-      <div></div>
+      <div className="flex flex-col lg:flex-row gap-10 lg:items-center w-full ">
+        <div className="space-y-2">
+          {[5, 4, 3, 2, 1].map((item, index) => (
+            <div className="flex gap-4 items-center  w-full">
+              <h1 className="text-sm">{item}</h1>
+              <Progress
+                key={index}
+                value={60 - item * 10}
+                className="w-60 h-2"
+              />
+            </div>
+          ))}
+        </div>
+        <div>
+          <h1 className="text-5xl font-medium">4.5</h1>
+          <Rating disabled />
+          <h1 className="">45 reviews</h1>
+        </div>
+      </div>
       <div>
         <Dialog>
           <DialogTrigger asChild>

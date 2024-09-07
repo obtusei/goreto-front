@@ -20,9 +20,10 @@ import { useToast } from "@/hooks/use-toast";
 import { registerFormSchema } from "@/utils/schema/register";
 import { Link } from "react-router-dom";
 import LogoIcon from "@/components/icons";
+import { useSignupMutation } from "@/redux/features/authSlice";
 
 export default function RegisterPage() {
-  // const [signUp] = useSignupMutation();
+  const [signUp] = useSignupMutation();
   const [loading, setLoading] = useState<boolean>(false);
   const [signUpType, setSignUpType] = useState<"INDIVIDUAL" | "ENTERPRISE">(
     "INDIVIDUAL"
@@ -42,36 +43,40 @@ export default function RegisterPage() {
   async function onSubmit(values: z.infer<typeof registerFormSchema>) {
     try {
       setLoading(true);
-      // const data = await signUp({
-      //   user: values,
-      //   type: signUpType,
-      // }).unwrap();
-      // console.log("asdas");
-      // toast({
-      //   title: "Register Successfully",
-      //   description: "You have registered as an " + signUpType.toLowerCase(),
-      // });
+      const data = await signUp({
+        first_name: values.fullname.split(" ")[0],
+        last_name: values.fullname.split(" ")[1],
+        username: values.username,
+        email: values.email,
+        password1: values.password,
+        password2: values.password,
+      }).unwrap();
+      console.log("asdas");
+      toast({
+        title: "Register Successfully",
+        description: "You have registered as an " + signUpType.toLowerCase(),
+      });
       // setTimeout(() => {
       setLoading(false);
       // router.push("/auth/login");
       // }, 2000);
     } catch (er: any) {
-      if (er?.data?.message?.includes("Email")) {
-        form.setError("email", {
-          message: "Email already exists",
-        });
-      } else if (er?.data?.message?.includes("Username")) {
-        form.setError("username", {
-          message: "Username already exists",
-        });
-      } else if (er.data.message.includes("WEAK PASSWORD")) {
-        form.setError("password", {
-          message: "Password is weak, set strong one",
-        });
-      } else {
-        // Error: {"status":400,"data":{"message":["WEAK PASSWORD"],"error":"Bad Request","statusCode":400}}
-        alert("Error: " + JSON.stringify(er));
-      }
+      // if (er?.data?.message?.includes("Email")) {
+      //   form.setError("email", {
+      //     message: "Email already exists",
+      //   });
+      // } else if (er?.data?.message?.includes("Username")) {
+      //   form.setError("username", {
+      //     message: "Username already exists",
+      //   });
+      // } else if (er.data.message.includes("WEAK PASSWORD")) {
+      //   form.setError("password", {
+      //     message: "Password is weak, set strong one",
+      //   });
+      // } else {
+      // Error: {"status":400,"data":{"message":["WEAK PASSWORD"],"error":"Bad Request","statusCode":400}}
+      console.log("Error: " + JSON.stringify(er));
+      // }
       setLoading(false);
     }
   }
