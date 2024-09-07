@@ -31,7 +31,7 @@ export default function ReviewSection({}: Props) {
       <div className="flex flex-col lg:flex-row gap-10 lg:items-center w-full ">
         <div className="space-y-2">
           {[5, 4, 3, 2, 1].map((item, index) => (
-            <div className="flex gap-4 items-center  w-full">
+            <div key={index} className="flex gap-4 items-center  w-full">
               <h1 className="text-sm">{item}</h1>
               <Progress
                 key={index}

@@ -43,14 +43,14 @@ export default function TrailCard({
         <div>
           <h1 className="text-xl font-semibold text-primary">{title}</h1>
           <h3 className="opacity-50">{location}</h3>
-          <div className="flex mt-2">
+          <div className="flex mt-2 gap-2">
             {/* {[1, 2, 3].map((item, index) => ( */}
             <Badge className="gap-2" variant={"secondary"}>
               <Ruler size={14} />
-              {length}
+              {length} km
             </Badge>
             <Badge className="gap-2" variant={"secondary"}>
-              <Ruler size={14} /> {duration}
+              <Ruler size={14} /> {duration} hrs
             </Badge>
             {/* ))} */}
           </div>

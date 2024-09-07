@@ -1,17 +1,48 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import Sidebar from "./components/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import pb from "./pocketbase";
+import { useNavigate } from "react-router-dom";
+import { Toaster } from "./components/ui/toaster";
+import { useToast } from "./hooks/use-toast";
 
-type Props = {};
-
-export default function Layout({}: Props) {
+export default function Layout() {
   const [darkMode, setDarkMode] = useState(false);
   const [navSize, setNavSize] = useState<number>(5);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLoggedIn = pb.authStore.isValid;
+  const { toast } = useToast();
+  const handleLogout = () => {
+    pb.authStore.clear();
+    toast({
+      title: "Logout Successfully",
+      description: "You have successfully logged out",
+    });
+  };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/auth/register");
+    }
+  }, []);
+
+  if (
+    location.pathname == "/auth/register" ||
+    location.pathname == "/auth/login"
+  )
+    return (
+      <div>
+        {" "}
+        <Outlet />
+        <Toaster />
+      </div>
+    );
   return (
     <div>
       <div className="hidden lg:block">
@@ -30,6 +61,7 @@ export default function Layout({}: Props) {
                 setDarkMode(!darkMode);
               }}
               navSize={navSize}
+              logout={handleLogout}
             />
           </ResizablePanel>
           <ResizableHandle className="hover:bg-primary active:bg-primary" />
@@ -47,6 +79,7 @@ export default function Layout({}: Props) {
               setDarkMode(!darkMode);
             }}
             navSize={navSize}
+            logout={handleLogout}
           />
         </div>
       </div>

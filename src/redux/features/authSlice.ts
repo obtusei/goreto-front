@@ -15,17 +15,6 @@ interface LogIn {
   password: string;
 }
 
-const getCSRFToken = () => {
-  const cookies = document.cookie.split(";");
-  for (let cookie of cookies) {
-    let [name, value] = cookie.split("=");
-    if (name.trim() === "csrftoken") {
-      return value;
-    }
-  }
-  return null;
-};
-
 export const authSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<void, LogIn>({
@@ -36,13 +25,11 @@ export const authSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
-    session: builder.query<any, string>({
-      query: (csrfToken) => ({
+    session: builder.query<any, any>({
+      query: () => ({
         url: "session-check/",
         method: "GET",
-        headers: {
-          "X-CSRFToken": "5fhFB08JiLQz7LilXMpXM02rqvbmfh8O",
-        },
+        credentials: "include",
       }),
     }),
     logout: builder.mutation<void, void>({

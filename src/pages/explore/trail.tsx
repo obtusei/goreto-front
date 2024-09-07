@@ -16,13 +16,18 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Ruler, Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TrailCard from "@/components/cards/TrailCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReviewCard from "@/components/cards/ReviewCard";
 import FactCard from "@/components/cards/FactCard";
 import CompletedSection from "@/components/cards/CompletedSection";
 import ReviewSection from "@/components/cards/ReviewSection";
+import { useEffect, useState } from "react";
+import { RecordModel } from "pocketbase";
+import pb from "@/pocketbase";
+import TrailBadge from "@/components/TrailBadge";
+import useFetch from "@/hooks/useFetch";
 
 type Props = {};
 
@@ -51,8 +56,38 @@ export default function TrailPage({}: Props) {
     },
   ];
 
+  // const [trail, setTrail] = useState<RecordModel>();
+  // const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const { data: trail, loading } = useFetch(
+    "trails",
+    String(id),
+    "location, property, reviews, reviews.rating"
+  );
+  // useEffect(() => {
+  //   const fetchTrails = async () => {
+  //     try {
+  //       // const records = await pb.collections("trails").getFullList(); // Fetch all trails
+  //       const record = await pb.collection("trails").getOne(id ? id : "", {
+  //         expand: "location, property, reviews, reviews.rating",
+  //       });
+  //       console.log(record);
+  //       setTrail(record);
+  //     } catch (err) {
+  //       console.error("Error fetching trails: ", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchTrails();
+  // }, []);
+
+  const reviews = (trail as RecordModel)?.expand?.reviews;
+  const reviewFetch = (id: string) => useFetch("reviews", id, "user");
+
   return (
-    <div className="p-5 md:p-10">
+    <div className="p-4 md:p-10">
       <div>
         <Breadcrumb>
           <BreadcrumbList>
@@ -61,23 +96,21 @@ export default function TrailPage({}: Props) {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/components">Trails</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Annapurna to ABC trail</BreadcrumbPage>
+              <BreadcrumbPage>{(trail as RecordModel)?.name}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="p-4">
-        <h1 className="text-3xl font-medium">Annapurna to ABC trail</h1>
+      <div className="p-2 md:p-4">
+        <h1 className="text-3xl font-medium">{(trail as RecordModel)?.name}</h1>
         <div className="mt-2 flex gap-2 items-center">
           <Badge className="text-md h-fit" variant={"outline"}>
             <Star size={14} /> 4.6 (12)
           </Badge>
           <Button asChild variant={"link"}>
-            <Link to={"/"}>Annapurna Conversation Area</Link>
+            <Link to={"/"}>
+              {(trail as RecordModel)?.expand?.location.name}
+            </Link>
           </Button>
         </div>
 
@@ -85,17 +118,42 @@ export default function TrailPage({}: Props) {
         <div className="grid lg:grid-cols-2">
           <div className="flex flex-col justify-between p-4 lg:p-10">
             <div className="grid grid-cols-2 gap-10 h-full">
-              {[1, 2, 3, 4, 6, 7, 8].map((item, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <div className="p-4 bg-primary/10 w-fit text-primary rounded-full">
-                    <Ruler />
-                  </div>
-                  <div>
-                    <p className="font-medium text-sm opacity-50">Distance</p>
-                    <p className="font-medium text-primary">2.2 km</p>
-                  </div>
-                </div>
-              ))}
+              <TrailBadge
+                title="Difficulty"
+                value={`${(trail as RecordModel)?.expand?.property.difficulty}`}
+                icon={<Ruler />}
+              />
+              <TrailBadge
+                title="Distance"
+                value={`${(trail as RecordModel)?.expand?.property.length} km`}
+                icon={<Ruler />}
+              />
+              <TrailBadge
+                title="Duration"
+                value={`${
+                  (trail as RecordModel)?.expand?.property.duration
+                } hours`}
+                icon={<Ruler />}
+              />
+              <TrailBadge
+                title="Temperature"
+                value={`${
+                  (trail as RecordModel)?.expand?.property.temperature
+                } C`}
+                icon={<Ruler />}
+              />
+              <TrailBadge
+                title="Safety Info"
+                value={`${(trail as RecordModel)?.expand?.property.safetyInfo}`}
+                icon={<Ruler />}
+              />
+              <TrailBadge
+                title="Accessibility"
+                value={`${
+                  (trail as RecordModel)?.expand?.property.accessibility
+                }`}
+                icon={<Ruler />}
+              />
             </div>
             <br />
             <div className="flex justify-stretch gap-4">
@@ -107,15 +165,23 @@ export default function TrailPage({}: Props) {
           <div>
             <Carousel className="w-full rounded-xl bg-clip-border">
               <CarouselContent className="w-full">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index} className="">
-                    <img
-                      src="/sample_1.jpg"
-                      alt="asdasd"
-                      className="rounded-2xl"
-                    />
-                  </CarouselItem>
-                ))}
+                {(trail as RecordModel)?.images.map(
+                  (image: any, index: number) => {
+                    const imageUrl = pb.files.getUrl(
+                      trail as RecordModel,
+                      image
+                    );
+                    return (
+                      <CarouselItem key={index} className="">
+                        <img
+                          src={imageUrl}
+                          alt={(trail as RecordModel)?.name}
+                          className="rounded-2xl"
+                        />
+                      </CarouselItem>
+                    );
+                  }
+                )}
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />
@@ -127,19 +193,8 @@ export default function TrailPage({}: Props) {
           <div className="col-span-4 lg:col-span-3 p-4 lg:p-10">
             {/* Description */}
             <div>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                incidunt rerum fugiat autem molestiae neque amet magni vitae
-                odio quia. Pariatur ipsam eveniet cupiditate voluptates tenetur
-                aliquam saepe culpa ad. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Facilis incidunt rerum fugiat autem molestiae
-                neque amet magni vitae odio quia. Pariatur ipsam eveniet
-                cupiditate voluptates tenetur aliquam saepe culpa ad. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                incidunt rerum fugiat autem molestiae neque amet magni vitae
-                odio quia. Pariatur ipsam eveniet cupiditate voluptates tenetur
-                aliquam saepe culpa ad.
-              </p>
+              {(trail as RecordModel)?.description}
+              <br />
               <br />
               <div className="flex flex-wrap gap-4">
                 {[1, 2, 3, 4, 4].map((item, index) => (
@@ -166,9 +221,26 @@ export default function TrailPage({}: Props) {
               <hr />
               <TabsContent value="reviews" className="flex gap-6 flex-col mt-4">
                 <ReviewSection />
-                {data.map((item, index) => (
-                  <ReviewCard key={index} />
-                ))}
+                {JSON.stringify(reviews)}
+                {reviews ? (
+                  reviews.map((review: any, index: number) => {
+                    return (
+                      <ReviewCard
+                        key={index}
+                        title={review.title}
+                        description={review.description}
+                        user={{
+                          name: "Ramesh",
+                          avatar: review.title,
+                        }}
+                        rating={3}
+                        updated={review.updated}
+                      />
+                    );
+                  })
+                ) : (
+                  <>Loading</>
+                )}
               </TabsContent>
               <TabsContent value="facts">
                 {data.map((item, index) => (

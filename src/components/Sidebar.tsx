@@ -2,14 +2,10 @@ import LogoIcon from "./icons";
 import { Button } from "./ui/button";
 import {
   Bookmark,
-  Clipboard,
-  Earth,
-  Landmark,
   LogOut,
   Map,
   Moon,
   Mountain,
-  Search,
   Sun,
   User2,
 } from "lucide-react";
@@ -19,9 +15,15 @@ type Props = {
   darkMode: boolean;
   setDarkMode: () => void;
   navSize: number;
+  logout: () => void;
 };
 
-export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
+export default function Sidebar({
+  darkMode,
+  setDarkMode,
+  navSize,
+  logout,
+}: Props) {
   const menu = [
     {
       title: "Explore",
@@ -51,7 +53,7 @@ export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
       <div className="hidden lg:block">
         <LogoIcon size="40" />
       </div>
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex fixed lg:relative bottom-2 inset-x-2 lg:flex-col items-center gap-4">
         <Button variant={"ghost"} size={"icon"} asChild>
           <Link to={"/"}>
             <span className="relative flex h-6 w-6">
@@ -100,7 +102,7 @@ export default function Sidebar({ darkMode, setDarkMode, navSize }: Props) {
         <Button
           variant={"ghost"}
           className="text-gray-400 transition-transform duration-300 gap-2"
-          onClick={setDarkMode}
+          onClick={logout}
         >
           <LogOut className="text-red-600" />
           {size ? "Logout" : ""}

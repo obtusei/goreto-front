@@ -1,5 +1,5 @@
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import L, { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
@@ -7,20 +7,17 @@ import "leaflet-routing-machine";
 import TrailSidebar from "@/components/TrailSidebar";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
+import useFetch from "@/hooks/useFetch";
+import { RecordModel } from "pocketbase";
+import pb from "@/pocketbase";
 
 type Props = {};
 
-const RoutingControl: React.FC = () => {
+const RoutingControl = ({ waypoints }: { waypoints: LatLngExpression[] }) => {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
-
-    const waypoints: LatLngExpression[] = [
-      [51.505, -0.09], // Start
-      [51.515, -0.1], // Checkpoint 1
-      [51.52, -0.12], // End
-    ];
 
     const routingControl = L.Routing.control({
       waypoints: waypoints.map((point) => L.latLng(point)),
@@ -75,10 +72,57 @@ const CustomMarker = L.divIcon({
 });
 
 export default function MapPage({}: Props) {
+  const [location, setLocation] = useState({ lat: 0, lon: 0 });
+  const [error, setError] = useState("");
+  const [trails, setTrails] = useState<RecordModel[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const waypoints: LatLngExpression[] = [
+    [51.505, -0.09], // Start
+    [51.515, -0.1], // Checkpoint 1
+    [51.52, -0.12], // End
+  ];
+
+  useEffect(() => {
+    const fetchTrails = async () => {
+      try {
+        // const records = await pb.collections("trails").getFullList(); // Fetch all trails
+        const records = await pb.collection("trails").getFullList({
+          expand: "coordinates",
+        });
+        console.log(records);
+        setTrails(records);
+      } catch (err) {
+        console.error("Error fetching trails: ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrails();
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (error) => {
+          setError(error.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   return (
     <div className="relative bg-green-200 h-screen overflow-hidden">
-      {/* <MapContainer
-        center={[51.505, -0.09]}
+      {JSON.stringify(trails)}
+      <MapContainer
+        center={[location.lat, location.lon]}
         zoom={13}
         scrollWheelZoom={false}
         style={{ height: "100vh", zIndex: 0 }}
@@ -88,14 +132,14 @@ export default function MapPage({}: Props) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]} icon={CustomMarker}>
+        <Marker position={[location.lat, location.lon]} icon={CustomMarker}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        <RoutingControl />
+        <RoutingControl waypoints={waypoints} />
         <ZoomControl />
-      </MapContainer> */}
+      </MapContainer>
       <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[500px] z-50 p-5">
         <TrailSidebar />
       </div>

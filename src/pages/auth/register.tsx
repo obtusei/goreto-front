@@ -21,6 +21,7 @@ import { registerFormSchema } from "@/utils/schema/register";
 import { Link } from "react-router-dom";
 import LogoIcon from "@/components/icons";
 import { useSignupMutation } from "@/redux/features/authSlice";
+import pb from "@/pocketbase";
 
 export default function RegisterPage() {
   const [signUp] = useSignupMutation();
@@ -43,15 +44,22 @@ export default function RegisterPage() {
   async function onSubmit(values: z.infer<typeof registerFormSchema>) {
     try {
       setLoading(true);
-      const data = await signUp({
-        first_name: values.fullname.split(" ")[0],
-        last_name: values.fullname.split(" ")[1],
+      // const data = await signUp({
+      //   first_name: values.fullname.split(" ")[0],
+      //   last_name: values.fullname.split(" ")[1],
+      //   username: values.username,
+      //   email: values.email,
+      //   password1: values.password,
+      //   password2: values.password,
+      // }).unwrap();
+      await pb.collection("users").create({
+        name: values.fullname,
         username: values.username,
         email: values.email,
-        password1: values.password,
-        password2: values.password,
-      }).unwrap();
-      console.log("asdas");
+        password: values.password,
+        passwordConfirm: values.confirmPassword,
+      });
+      alert("User created successfully!");
       toast({
         title: "Register Successfully",
         description: "You have registered as an " + signUpType.toLowerCase(),

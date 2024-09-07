@@ -1,5 +1,3 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -14,12 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Eye, EyeOff, Key, Loader2Icon } from "lucide-react";
+import { Eye, EyeOff, Loader2Icon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoIcon from "@/components/icons";
-import { useLoginMutation } from "@/redux/features/authSlice";
-import { useCookies } from "react-cookie";
+import pb from "@/pocketbase";
+
 const formSchema = z.object({
   username: z.string(),
   password: z.string(),
@@ -33,36 +31,25 @@ export default function LoginPage() {
       password: "",
     },
   });
-  const [logIn] = useLoginMutation();
   const [loading, setLoading] = useState<boolean>(false);
-  // const { data: session } = useSessionQuery();
-  // const [sessionData, setSessionData] = useState<string>("");
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  // const router = useRouter();
-  const [crsftoken, setCrsftoken] = useCookies(["crsftoken"]);
-  const [sesionId, setSessionId] = useCookies(["sessionid"]);
   const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
-      // if (values.username == "admin" && values.password == "admin") {
-      //   router.push("/admin");
-      //   setLoading(false);
-      // } else {
-      const data = await logIn(values).unwrap();
-      console.log(data);
-
-      setLoading(false);
+      await pb
+        .collection("users")
+        .authWithPassword(values.username, values.password);
       toast({
         title: "Login Successful",
         description: "You have successfully logged in",
       });
-      //   setTimeout(() => {
-      //     setLoading(false);
-      //     router.push("/instant-jobs");
-      //   }, 2000);
-      // }
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/");
+      }, 2000);
     } catch (er: any) {
       toast({
         title: "Login Failed",
@@ -134,22 +121,6 @@ export default function LoginPage() {
         </Form>
 
         <div className="flex flex-col items-center py-4 gap-4">
-          {/* <Button
-          type="submit"
-          variant={"outline"}
-          className="w-full gap-2"
-          onClick={() => {
-            alert("asd");
-          }}
-        >
-          <Key size={18} className="rotate-45" />
-          Sign In with Pass key
-        </Button>
-        <p className="text-gray-500 text-[12px] font-semibold">OR</p>
-        <Button type="submit" variant={"outline"} className="w-full gap-2">
-          <GoogleIcon />
-          Continue with Google
-        </Button> */}
           <p className="text-sm text-gray-600 font-medium">
             Dont have an account?{" "}
             <Link to="/auth/register" className=" text-main font-medium">

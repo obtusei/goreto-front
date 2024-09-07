@@ -1,8 +1,14 @@
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const Rating = ({ disabled = false }: { disabled?: boolean }) => {
-  const [rating, setRating] = useState(2);
+const Rating = ({
+  disabled = false,
+  value,
+}: {
+  disabled?: boolean;
+  value?: number;
+}) => {
+  const [rating, setRating] = useState(value ? value : 0);
   const handleRatingClick = (value: number) => {
     // if (!authState?.authenticated) {
     //   openModal();

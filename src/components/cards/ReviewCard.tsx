@@ -1,10 +1,25 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Rating from "../primitives/rating";
-import { Ruler } from "lucide-react";
+import { userInfo } from "os";
 
-type Props = {};
+type Props = {
+  title: string;
+  description: string;
+  rating: number;
+  user: {
+    name: string;
+    avatar: string;
+  };
+  updated: string;
+};
 
-export default function ReviewCard({}: Props) {
+export default function ReviewCard({
+  title,
+  description,
+  rating,
+  user,
+  updated,
+}: Props) {
   return (
     <div className="border p-4 rounded-lg">
       <div className="flex gap-2">
@@ -13,14 +28,15 @@ export default function ReviewCard({}: Props) {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div>
-          <h1 className="text-lg font-medium">Abhishek Bhatta</h1>
+          <h1 className="text-lg font-medium">{user.name}</h1>
           <div className="flex gap-2">
-            <h1>Aug 12, 2024</h1>
+            <h1>{new Date(updated).toLocaleDateString()}</h1>
             <h1>Hiking</h1>
           </div>
         </div>
       </div>
-      <Rating disabled />
+      <Rating disabled value={rating} />
+      <h1 className="font-medium">{title}</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. A blanditiis
         distinctio laudantium veniam unde quisquam impedit maiores, temporibus
