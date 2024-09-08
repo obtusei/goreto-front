@@ -28,13 +28,14 @@ export default function Layout() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/auth/register");
+      navigate("/landing");
     }
   }, []);
 
   if (
     location.pathname == "/auth/register" ||
-    location.pathname == "/auth/login"
+    location.pathname == "/auth/login" ||
+    location.pathname == "/landing"
   )
     return (
       <div>

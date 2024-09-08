@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Arrival in Kathmandu",
+    "location": "Kathmandu",
+    "day": "Day 1"
+  },
+  {
+    "title": "Drive from Kathmandu to Soti Khola",
+    "location": "Soti Khola",
+    "day": "Day 2"
+  },
+  {
+    "title": "Trek from Soti Khola to Machha Khola",
+    "location": "Machha Khola",
+    "day": "Day 3"
+  },
+  {
+    "title": "Trek from Machha Khola to Jagat",
+    "location": "Jagat",
+    "day": "Day 4"
+  },
+  {
+    "title": "Trek from Jagat to Deng",
+    "location": "Deng",
+    "day": "Day 5"
+  },
+  {
+    "title": "Trek from Deng to Namrung",
+    "location": "Namrung",
+    "day": "Day 6"
+  },
+  {
+    "title": "Trek from Namrung to Lho",
+    "location": "Lho",
+    "day": "Day 7"
+  },
+  {
+    "title": "Trek from Lho to Samagaon",
+    "location": "Samagaon",
+    "day": "Day 8"
+  },
+  {
+    "title": "Acclimatization Day in Samagaon",
+    "location": "Samagaon",
+    "day": "Day 9"
+  },
+  {
+    "title": "Trek from Samagaon to Samdo",
+    "location": "Samdo",
+    "day": "Day 10"
+  },
+  {
+    "title": "Trek from Samdo to Dharmashala (Larkya Phedi)",
+    "location": "Dharmashala (Larkya Phedi)",
+    "day": "Day 11"
+  },
+  {
+    "title": "Cross Larkya La Pass and trek to Bimthang",
+    "location": "Bimthang",
+    "day": "Day 12"
+  },
+  {
+    "title": "Trek from Bimthang to Tilije",
+    "location": "Tilije",
+    "day": "Day 13"
+  },
+  {
+    "title": "Trek from Tilije to Dharapani and drive to Kathmandu",
+    "location": "Kathmandu",
+    "day": "Day 14"
+  },
+  {
+    "title": "Departure from Kathmandu",
+    "location": "Kathmandu",
+    "day": "Day 15"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "hotel-name": "Hotel Yak & Yeti",
+
+    "location": "Kathmandu, Nepal",
+
+    "room type": "Deluxe Room",
+
+    "price": "$120 per night",
+
+    "available": true,
+
+    "images": [
+      "https://www.yakandyeti.com/templates/yootheme/cache/front-view-1-09acfe9a.jpeg",
+
+      "https://www.yakandyeti.com/templates/yootheme/cache/art-as-a-focal-point-1-736a9636.jpeg",
+
+      "https://www.yakandyeti.com/templates/yootheme/cache/cultural-tapestry-1-4f9e8263.jpeg",
+
+      "https://www.yakandyeti.com/templates/yootheme/cache/blend-of-old-new-66a1241f.jpeg"
+    ]
+  },
+
+  {
+    "hotel-name": "The Dwarika's Hotel",
+
+    "location": "Kathmandu, Nepal",
+
+    "room type": "Heritage Room",
+
+    "price": "$180 per night",
+
+    "available": false,
+
+    "images": [
+      "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/192448337.jpg?k=f820d06e3e0e119ffd5de1da20a4ca3c2d357d1b426936ce5c28eff888c4357b&o=&s=1024x",
+      "https://pix8.agoda.net/hotelImages/772/77265/77265_14100611400022582420.jpg?ca=13&ce=1&s=1024x",
+      "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/192452021.jpg?k=d35198858a92900553245800f8d28fb1b0d2281dfd61e1b9e681151ed0e1413f&o=&s=1024x"
+    ]
+  },
+
+  {
+    "hotel-name": "Marriott Kathmandu",
+
+    "location": "Kathmandu, Nepal",
+
+    "room type": "Executive Room",
+
+    "price": "$200 per night",
+
+    "available": true,
+
+    "images": [
+      "https://cache.marriott.com/content/dam/marriott-renditions/KTMMC/ktmmc-exterior-2985-hor-pano.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1600px:*",
+
+      "https://cache.marriott.com/content/dam/marriott-renditions/KTMMC/ktmmc-pool-3000-hor-pano.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1600px:*",
+
+      "https://cache.marriott.com/content/dam/marriott-renditions/KTMMC/ktmmc-executive-suite-2979-hor-pano.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1600px:*"
+    ]
+  },
+
+  {
+    "hotel-name": "Radisson Hotel",
+
+    "location": "Kathmandu, Nepal",
+
+    "room type": "Business Class Room",
+
+    "price": "$140 per night",
+
+    "available": true,
+
+    "images": [
+      "https://www.fishtail-lodge.com/wp-content/uploads/2021/07/suite-bedroom.jpg",
+
+      "https://www.fishtail-lodge.com/wp-content/uploads/2021/07/deluxe-room-palm-court1.jpg",
+
+      "https://www.fishtail-lodge.com/wp-content/uploads/2021/07/standard-twin-room.jpg"
+    ]
+  },
+
+  {
+    "hotel-name": "Hotel Shanker",
+
+    "location": "Kathmandu, Nepal",
+
+    "room type": "Superior Room",
+
+    "price": "$90 per night",
+
+    "available": false,
+
+    "images": [
+      "https://images.squarespace-cdn.com/content/v1/53ecd1bde4b0a6f9524254f8/1408696831056-7MGCUH3PFXPBJYI61YJK/morning_web_fixed.jpg?format=1500w",
+
+      "https://images.squarespace-cdn.com/content/v1/53ecd1bde4b0a6f9524254f8/1408696766827-AEJDRVQSPTFUJQ8PK5QP/breakfast+web.jpg?format=1500w",
+
+      "https://images.squarespace-cdn.com/content/v1/53ecd1bde4b0a6f9524254f8/1421586339727-K6NPQCNSFTSTOTK6ZGJ3/breakfast-web-940px.jpg?format=1500w"
+    ]
+  }
+]

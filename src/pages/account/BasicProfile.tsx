@@ -135,11 +135,15 @@ export default function BasicProfile() {
         <div className="relative">
           <Avatar className="w-20 h-20">
             <AvatarImage
-              src={imageURL ? "http://localhost:3000/" + imageURL : undefined}
+              src={
+                imageURL
+                  ? "https://media.licdn.com/dms/image/v2/D4E03AQHPJhaC-ZPuLA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1687282985694?e=1731542400&v=beta&t=vhgLApdUVttNlLhexVe5VfFK1BIN0A3gmf7UYrLCvbs"
+                  : undefined
+              }
               alt="avatar"
             />
             <AvatarFallback>
-              {/* {userProfile?.name.split("")[0]} */}
+              {/* {userProfile?.name.split("")[0]} */}AB
             </AvatarFallback>
           </Avatar>
           {/* {userProfile?.isEmailVerifed && (

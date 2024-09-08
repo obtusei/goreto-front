@@ -7,7 +7,8 @@ import "leaflet-routing-machine";
 import TrailSidebar from "@/components/TrailSidebar";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
-import useFetch from "@/hooks/useFetch";
+import { useLocation } from "react-router-dom";
+
 import { RecordModel } from "pocketbase";
 import pb from "@/pocketbase";
 
@@ -43,6 +44,10 @@ const ZoomControl: React.FC = () => {
     map.zoomOut();
   };
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const trailId = queryParams.get("id");
+
   return (
     <div className="absolute bottom-8 right-4 flex flex-col space-y-2 z-50">
       <Button
@@ -76,7 +81,7 @@ export default function MapPage({}: Props) {
   const [error, setError] = useState("");
   const [trails, setTrails] = useState<RecordModel[]>([]);
   const [loading, setLoading] = useState(true);
-
+  // const {id} = query
   useEffect(() => {
     const fetchTrails = async () => {
       try {
@@ -123,7 +128,7 @@ export default function MapPage({}: Props) {
 
   return (
     <div className="relative bg-green-200 h-screen overflow-hidden">
-      <MapContainer
+      {/* <MapContainer
         center={[location.lat, location.lon]}
         zoom={13}
         scrollWheelZoom={false}
@@ -141,7 +146,7 @@ export default function MapPage({}: Props) {
         </Marker>
         <RoutingControl waypoints={waypoints} />
         <ZoomControl />
-      </MapContainer>
+      </MapContainer> */}
       <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[500px] z-50 p-5">
         <TrailSidebar />
       </div>

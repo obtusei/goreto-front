@@ -1,14 +1,6 @@
 import LogoIcon from "./icons";
 import { Button } from "./ui/button";
-import {
-  Bookmark,
-  LogOut,
-  Map,
-  Moon,
-  Mountain,
-  Sun,
-  User2,
-} from "lucide-react";
+import { Hotel, LogOut, Map, Moon, Mountain, Sun, User2 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 type Props = {
@@ -36,8 +28,8 @@ export default function Sidebar({
       href: "/map",
     },
     {
-      title: "Saved",
-      icon: <Bookmark />,
+      title: "Hotels",
+      icon: <Hotel />,
       href: "/saved",
     },
     {

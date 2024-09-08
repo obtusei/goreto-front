@@ -23,7 +23,6 @@ export default function AccountPage({}: Props) {
           <TabsList className="">
             <TabsTrigger value="account">Basic Profile</TabsTrigger>
             <TabsTrigger value="subscription">Subscription</TabsTrigger>
-            <TabsTrigger value="rewards">Rewards</TabsTrigger>
           </TabsList>
           <TabsContent value="account" className="py-6">
             <BasicProfile />
@@ -31,7 +30,6 @@ export default function AccountPage({}: Props) {
           <TabsContent value="subscription" className="py-6">
             <AccountSubscription />
           </TabsContent>
-          <TabsContent value="rewards">Change your password here.</TabsContent>
         </Tabs>
       </div>
     </div>

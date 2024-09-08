@@ -1,4 +1,5 @@
 import {
+  AlertCircle,
   ArrowRight,
   Bookmark,
   Circle,
@@ -7,21 +8,41 @@ import {
   Star,
   XCircle,
 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsTrigger } from "./ui/tabs";
 import { TabsList } from "@radix-ui/react-tabs";
+import properties from "@/lib/properties";
+import itinerary from "@/lib/itinerary.json";
 
 type Props = {};
 
 export default function TrailSidebar({}: Props) {
   const [startTrail, setStartTrail] = useState(false);
+  const [isAlert, setIsAlert] = useState(false);
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-lg h-full p-6 overflow-y-scroll no-scrollbar">
+    <div
+      className={`${
+        isAlert ? "bg-red-50 border-red-600" : "bg-white"
+      } border dark:bg-slate-900 rounded-lg h-full p-6 overflow-y-scroll no-scrollbar`}
+    >
       <div className="flex gap-10 justify-between">
-        <h1 className="text-3xl font-medium">Annapurna to ABC trail</h1>
+        <h1 className={`${isAlert ? "text-red-600" : ""} text-3xl font-medium`}>
+          Annapurna to ABC trail
+        </h1>
         <Button size={"icon"} variant={"ghost"}>
           <Bookmark />
         </Button>
@@ -57,15 +78,15 @@ export default function TrailSidebar({}: Props) {
               Read More
             </Link>
           </div>
-          <div className="flex flex-wrap gap-20 pt-6 h-full">
-            {[1, 2, 3, 4, 6, 7, 8].map((item, index) => (
+          <div className="flex flex-wrap gap-16 pt-6 h-full">
+            {properties.map((item, index) => (
               <div key={index} className="flex items-center gap-2">
                 <div className="p-4 bg-primary/10 w-fit text-primary rounded-full">
-                  <Ruler />
+                  {item.icon}
                 </div>
                 <div>
-                  <p className="font-medium text-sm opacity-50">Distance</p>
-                  <p className="font-medium text-primary">2.2 km</p>
+                  <p className="font-medium text-sm opacity-50">{item.title}</p>
+                  <p className="font-medium text-primary">{item.value}</p>
                 </div>
               </div>
             ))}
@@ -81,10 +102,67 @@ export default function TrailSidebar({}: Props) {
       ) : (
         <Tabs>
           <br />
+          <div>
+            {!isAlert ? (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button className="w-full gap-4" variant={"destructive"}>
+                    <AlertCircle /> Alert
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-red-50">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="text-red-600">
+                      Are you sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This alert action will alert nearby authorities like park
+                      patrol, nearby police station, or the hotel you are
+                      staying in.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => setIsAlert(true)}
+                      className="bg-red-600 hover:bg-red-700 active:bg-red-800"
+                    >
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            ) : (
+              <div className="border border-red-600 bg-red-100 p-4 rounded-lg">
+                <h1 className="text-red-600 font-medium">
+                  Your last location is shared!
+                </h1>
+                <p className="text-sm">
+                  If you don't response, authorities will be alerted with your
+                  last known location and your basic information including
+                  contact details.
+                </p>
+                <br />
+                <div className="flex gap-2">
+                  <Button className="w-full" variant={"destructive"}>
+                    SMS
+                  </Button>
+                  <Button className="w-full" variant={"destructive"}>
+                    Call
+                  </Button>
+                  <Button className="w-full" variant={"destructive"}>
+                    Response
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+          <br />
           <hr />
-          <TabsList className="mt-2">
+          <TabsList defaultValue="hotels" className="mt-2">
             <TabsTrigger value="trail">Trail</TabsTrigger>
             <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
+            <TabsTrigger value="hotels">Hotels</TabsTrigger>
           </TabsList>
           <TabsContent value="trail">
             <div className="py-4">
@@ -97,20 +175,30 @@ export default function TrailSidebar({}: Props) {
                     title: "Trail have began",
                     isStart: true,
                     isCurrentPath: true,
+                    time: "12:30 PM",
+                    location: "",
                   },
                   {
                     title: "Reached Dunche",
+                    time: "2:15 PM",
+                    location: "",
                   },
                   {
-                    title: "Trail have began",
+                    title: "Checkpoint reached",
                     isCheckpoint: true,
+                    time: "3:40 PM",
+                    location: "",
                   },
                   {
-                    title: "Trail have began",
+                    title: "Reach have began",
+                    time: "5:20 PM",
+                    location: "",
                   },
                   {
-                    title: "Trail have began",
+                    title: "Trail will end",
                     isEndPoint: true,
+                    time: "6:10 PM",
+                    location: "",
                   },
                 ].map((item, index) => (
                   <div
@@ -132,13 +220,11 @@ export default function TrailSidebar({}: Props) {
                         )}
                       </div>
                       <div>
-                        <h1 className="text-lg font-medium">
-                          You have started the trail
-                        </h1>
+                        <h1 className="text-lg font-medium">{item.title}</h1>
                         <p>Chaubar, Kathmandu</p>
                       </div>
                     </div>
-                    <p>5:30 PM</p>
+                    <p>{item.time}</p>
                   </div>
                 ))}
               </div>
@@ -166,40 +252,16 @@ export default function TrailSidebar({}: Props) {
               <br />
               <hr />
               <div>
-                {[
-                  {
-                    title: "Trail have began",
-                    isStart: true,
-                    isCurrentPath: true,
-                  },
-                  {
-                    title: "Reached Dunche",
-                  },
-                  {
-                    title: "Trail have began",
-                    isCheckpoint: true,
-                  },
-                  {
-                    title: "Trail have began",
-                  },
-                  {
-                    title: "Trail have began",
-                    isEndPoint: true,
-                  },
-                ].map((item, index) => (
+                {itinerary.map((item, index) => (
                   <div
                     key={index}
-                    className={`flex justify-between border-b items-start p-2 ${
-                      item.isCurrentPath ? "bg-primary/5 text-primary" : ""
-                    }`}
+                    className={`flex justify-between border-b items-start p-2`}
                   >
                     <div>
-                      <h1 className="text-lg font-medium">
-                        You have started the trail
-                      </h1>
-                      <p>Chaubar, Kathmandu</p>
+                      <h1 className="text-lg font-medium">{item.title}</h1>
+                      <p>{item.location}</p>
                     </div>
-                    <p>5:30 PM</p>
+                    <p>{item.day}</p>
                   </div>
                 ))}
               </div>
@@ -212,6 +274,30 @@ export default function TrailSidebar({}: Props) {
                 Cancel
               </Button>
             </div>
+          </TabsContent>
+          <TabsContent value="hotels">
+            {[1, 2, 3, 4].map((item, index) => (
+              <div
+                key={index}
+                className="border-b flex items-center justify-between"
+              >
+                <div>
+                  <h1 className="text-lg font-medium">Hotel Magar Lama</h1>
+                  <h1>Baidati, Kaski</h1>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Badge>10%</Badge>
+                  <div>
+                    <s>Rs. 2000</s>
+                    <br />
+                    <b>Rs. 1800</b>
+                  </div>
+                </div>
+                <Button variant={"outline"} size={"sm"}>
+                  Book
+                </Button>
+              </div>
+            ))}
           </TabsContent>
         </Tabs>
       )}

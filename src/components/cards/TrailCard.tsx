@@ -1,10 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
 import { ArrowRight, Ruler } from "lucide-react";
@@ -12,27 +9,19 @@ import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";
 
 type Props = {
-  id: string;
   title: string;
   location: string;
-  length: string;
-  duration: string;
+  images: string[];
 };
 
-export default function TrailCard({
-  id,
-  title,
-  location,
-  length,
-  duration,
-}: Props) {
+export default function TrailCard({ title, location, images }: Props) {
   return (
     <div className="hover:bg-primary/10 p-2 grow-0 flex flex-col items-center">
       <Carousel className="w-full">
         <CarouselContent className="w-full">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="w-[400px]">
-              <img src="/sample_1.jpg" alt="asdasd" className="" />
+          {images.map((img, index) => (
+            <CarouselItem key={index} className="w-[400px] h-[400px]">
+              <img src={img} className="h-full object-cover w-full" />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -50,13 +39,13 @@ export default function TrailCard({
               {length} km
             </Badge>
             <Badge className="gap-2" variant={"secondary"}>
-              <Ruler size={14} /> {duration} hrs
+              <Ruler size={14} />3 hrs
             </Badge>
             {/* ))} */}
           </div>
         </div>
         <Button variant={"link"} className="gap-2" asChild>
-          <Link to={`/trails/${id}`}>
+          <Link to={`/trails/12 `}>
             More Detail <ArrowRight size={16} />
           </Link>
         </Button>

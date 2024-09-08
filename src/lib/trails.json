@@ -1,24 +1,141 @@
 [
   {
-    "title": "asdas",
-    "description": "",
-    "location": "",
-    "images": [],
-    "properties": [
-      {
-        "title": "Duration",
-        "value": "6 hours"
-      },
-      {
-        "title": "Duration",
-        "value": "6 hours"
-      }
-    ],
-    "reviews": [
-      {
-        "title": "asdasd",
-        "content": ""
-      }
+    "title": "Mount Everest",
+
+    "description": "The world's highest peak, offering breathtaking views and adventurous trekking routes.",
+
+    "location": "Solukhumbu, Nepal",
+
+    "images": [
+      "https://plus.unsplash.com/premium_photo-1688645554172-d3aef5f837ce?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TW91bnQlMjBFdmVyZXN0fGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1502159319678-85c4bcb240bd?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TW91bnQlMjBFdmVyZXN0fGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Pokhara",
+
+    "description": "A serene city known for its lakes, waterfalls, and spectacular mountain views.",
+
+    "location": "Pokhara, Kaski",
+
+    "images": [
+      "https://media.istockphoto.com/id/1638373198/photo/beautiful-green-phewa-lake-with-boats-and-green-mountains-in-pokhara-city-of-nepal-during.webp?a=1&b=1&s=612x612&w=0&k=20&c=tVgmU_DSdofR8ZaFRNVIFgnhT9cdBizmvkJ9ethZbng=",
+
+      "https://media.istockphoto.com/id/487764186/photo/never-ending-peace-and-love.webp?a=1&b=1&s=612x612&w=0&k=20&c=cBoGMlEER5EKh8jhcBueRfa6VE1v8q0njH-NNGEZJBo="
+    ]
+  },
+
+  {
+    "title": "Chitwan National Park",
+
+    "description": "A UNESCO World Heritage Site, home to diverse wildlife and dense forests.",
+
+    "location": "Chitwan, Nepal",
+
+    "images": [
+      "https://unsplash.com/photos/a-couple-of-boats-sitting-on-top-of-a-river-PTiN53UHFh8",
+
+      "https://images.unsplash.com/photo-1706187607315-33ff4a5a8d1a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2hpdHdhbiUyMG5hdGlvbmFsJTIwcGFya3xlbnwwfHwwfHx8MA%3D%3D"
+    ]
+  },
+
+  {
+    "title": "Lumbini",
+
+    "description": "The birthplace of Lord Buddha, a pilgrimage site with historical and spiritual significance.",
+
+    "location": "Lumbini, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1611325695972-d22894e3f8d9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bHVtYmluaXxlbnwwfHwwfHx8MA%3D%3D",
+
+      "https://unsplash.com/photos/brown-and-white-concrete-building-under-blue-sky-during-daytime-7NEwINycJkw"
+    ]
+  },
+
+  {
+    "title": "Annapurna Base Camp",
+
+    "description": "A popular trekking destination offering scenic views of the Annapurna mountain range.",
+
+    "location": "Annapurna, Nepal",
+
+    "images": [
+      "https://plus.unsplash.com/premium_photo-1661842738159-21f8a158665d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YW5uYXB1cm5hfGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1528375020190-3001bb30b71d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5uYXB1cm5hfGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Rara Lake",
+
+    "description": "Nepal's largest lake, surrounded by pine forests and snow-capped mountains.",
+
+    "location": "Mugu, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1631873505000-c9e468448040?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fFJhcmElMjBMYWtlfGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1636030177357-83cf3ff1b168?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFJhcmElMjBMYWtlfGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Boudhanath Stupa",
+
+    "description": "One of the largest stupas in the world, a significant pilgrimage site for Buddhists.",
+
+    "location": "Kathmandu, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1648702978569-d21e6c4701b2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Qm91ZGhhbmF0aCUyMFN0dXBhfGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1658759551946-95e610d84a23?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Qm91ZGhhbmF0aCUyMFN0dXBhfGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Patan Durbar Square",
+
+    "description": "An ancient royal palace complex filled with temples, statues, and rich history.",
+
+    "location": "Patan, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1609898793184-7d1496532e84?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGF0YW4lMjBkdXJiYXIlMjBzcXVhcmV8ZW58MHx8MHx8fDA%3Dg",
+
+      "https://images.unsplash.com/photo-1693586411163-1daad7697085?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBhdGFuJTIwZHVyYmFyJTIwc3F1YXJlfGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Nagarkot",
+
+    "description": "A hill station known for panoramic views of the Himalayas, especially during sunrise.",
+
+    "location": "Bhaktapur, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1610428418346-535c21b8a678?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fG5hZ2Fya290fGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1660914166057-9e46ac4f45b8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG5hZ2Fya290fGVufDB8fDB8fHww"
+    ]
+  },
+
+  {
+    "title": "Bhaktapur Durbar Square",
+
+    "description": "A well-preserved medieval city known for its rich culture, temples, and art.",
+
+    "location": "Bhaktapur, Nepal",
+
+    "images": [
+      "https://images.unsplash.com/photo-1706188024768-886ba6a876b4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ymhha3RhcHVyJTIwZHVyYmFyJTIwc3F1YXJlfGVufDB8fDB8fHww",
+
+      "https://images.unsplash.com/photo-1704870872929-532c99614890?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ]
   }
 ]

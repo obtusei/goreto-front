@@ -14,6 +14,7 @@ import AccountPage from "./pages/account/index.tsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 import { CookiesProvider } from "react-cookie";
+import Landing from "./pages/landing.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CookiesProvider defaultSetOptions={{ path: "/" }}>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<App />} />
+              <Route path="landing" element={<Landing />} />
               <Route path="auth/login" element={<LoginPage />} />
               <Route path="auth/register" element={<RegisterPage />} />
               <Route path="apps" element={<ExplorePage />} />
