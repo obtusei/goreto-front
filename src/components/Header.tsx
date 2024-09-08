@@ -12,6 +12,8 @@ export default function Header({}: Props) {
         <h1 className="text-3xl font-medium">Explore</h1>
         <div>
           <div className="flex gap-2">
+            {/* Button */}
+
             <Input type="search" placeholder="Search Trails, Places and All" />
             <Button>
               <Search />

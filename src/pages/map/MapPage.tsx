@@ -77,12 +77,6 @@ export default function MapPage({}: Props) {
   const [trails, setTrails] = useState<RecordModel[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const waypoints: LatLngExpression[] = [
-    [51.505, -0.09], // Start
-    [51.515, -0.1], // Checkpoint 1
-    [51.52, -0.12], // End
-  ];
-
   useEffect(() => {
     const fetchTrails = async () => {
       try {
@@ -118,9 +112,17 @@ export default function MapPage({}: Props) {
     }
   }, []);
 
+  const firstLocation =
+    trails.length > 0 ? trails[0].expand?.coordinates : null;
+  const waypoints: LatLngExpression[] = firstLocation
+    ? firstLocation.map((coord: any) => [
+        parseFloat(coord.latitude.trim()), // Latitude
+        parseFloat(coord.longitude.trim()), // Longitude
+      ])
+    : [];
+
   return (
     <div className="relative bg-green-200 h-screen overflow-hidden">
-      {JSON.stringify(trails)}
       <MapContainer
         center={[location.lat, location.lon]}
         zoom={13}

@@ -16,7 +16,7 @@ export default function ExplorePage({}) {
       try {
         // const records = await pb.collections("trails").getFullList(); // Fetch all trails
         const records = await pb.collection("trails").getFullList({
-          expand: "property",
+          expand: "location property",
         });
         console.log(records);
         setTrails(records);
